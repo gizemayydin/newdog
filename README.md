@@ -70,5 +70,5 @@ python rank_documents/preprocess_topics.py /path/to/topics
 python rank_documents/rank_documents.py output_filename db_name option
 ```
 ```output_filename``` is the one used in Setup to creae JSON collection of the documents. If you are not planning to use BERT, you may leave it empty.
-```db_name``` is the name of the database you one to connect.
+```db_name``` is the name of the database you want to connect.
 ```option``` is 1:DuckDB + Bert, 2:DuckDB, 3:MonetDB
