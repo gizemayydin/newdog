@@ -13,6 +13,7 @@ from nboost.types import Choice
 import json
 import pymonetdb
 import statistics
+import sys
 
 def preprocess(content):
 	return content[20:200]
@@ -21,8 +22,8 @@ def get_queries():
 	#Get the preprocessed queries
 	queries = []
 	with open("topics.data", 'rb') as filehandle:
-    	queries = pickle.load(filehandle)
-    return queries
+		queries = pickle.load(filehandle)
+	return queries
 
 def get_content(raw_docs):
 	keys = []
@@ -32,7 +33,7 @@ def get_content(raw_docs):
 		contents = json_file.read()
 		json_data = json.loads(contents)
 		contents = {item['id']:item for item in json_data}
-    return contents
+	return contents
 
 def BM25(input_query,c):
 	query_words= ""
