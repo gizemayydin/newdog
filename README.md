@@ -52,5 +52,11 @@ monetdb release db_name
 python create_db/create_db.py path/to/csvs option db_name
 ```
 Where ```option``` is: 1:DuckDB 2:DuckDB+index 3:MonetDB 4:MonetDB+index
-
+ 
+* If BERT model of NBoost will be used, follow these steps:
+  * Create JSON collection of your documents using Anserini. [Example](https://github.com/castorini/anserini/blob/master/src/main/python/passage_retrieval/example/robust04.md).
+  * Run:
+  ```
+  python mergejson.py output_filename path/to/raw/documents
+  ```
 
