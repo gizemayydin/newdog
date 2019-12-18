@@ -52,8 +52,8 @@ if __name__ == '__main__':
 	read_docs()
 
 	#initialize c and con to dummy 
-	c = 0
-	con = 0
+	c = None
+	con = None
 	
 	#Create the Database
 	if option_number == 1 or option_number == 2 :
