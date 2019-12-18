@@ -59,4 +59,16 @@ Where ```option``` is: 1:DuckDB 2:DuckDB+index 3:MonetDB 4:MonetDB+index
   ```
   python rank_documents/mergejson.py output_filename path/to/raw/documents
   ```
+## Ranking
 
+* Preprocess the queries to be executed and store it in a file:
+```
+python rank_documents/preprocess_topics.py /path/to/topics 
+```
+* Ranking the documents using BM25:
+```
+python rank_documents/rank_documents.py output_filename db_name option
+```
+```output_filename``` is the one used in Setup to creae JSON collection of the documents. If you are not planning to use BERT, you may leave it empty.
+```db_name``` is the name of the database you one to connect.
+```option``` is 1:DuckDB + Bert, 2:DuckDB, 3:MonetDB
