@@ -45,7 +45,7 @@ def get_content(raw_docs):
 	return contents
 
 def BM25(input_query,c,opt):
-	#Rank documens using BM25, return up to 100 results.
+	#Rank documents using BM25, return up to 100 results.
 
 	#tokenize the query
 	query_words= ""
