@@ -30,10 +30,8 @@ sudo usermod -a -G monetdb $USER
 sudo rm /usr/lib/x86_64-linux-gnu/monetdb5/createdb/72_fits.sql
 sudo rm /usr/lib/x86_64-linux-gnu/monetdb5/fits.mal
 ```
-* [NBoost](https://github.com/koursaros-ai/nboost) is used to rerank the documents ranked by BM25. To install, use:
-```
-pip install nboost
-```
+* [NBoost](https://github.com/koursaros-ai/nboost) is used to rerank the documents ranked by BM25. The files "base.py", "logger.py" and "bert.py" are obtained directly from [NBoost](https://github.com/koursaros-ai/nboost) repository [1]. To run the BERT model, please download and unzip the specifications from this link: https://storage.googleapis.com/koursaros/pt-bert-base-uncased-msmarco.tar.gz [1]
+
 In case of errors, check alternative ways to install the packages from their respective GitHub repositories. 
 
 ## Setup
@@ -68,8 +66,14 @@ python rank_documents/preprocess_topics.py /path/to/topics
 ```
 * Ranking the documents using BM25:
 ```
-python rank_documents/rank_documents.py output_filename db_name option
+python rank_documents/rank_documents.py output_filename db_name option bert_directory
 ```
 ```output_filename``` is the one used in Setup to creae JSON collection of the documents. If you are not planning to use BERT, you may leave it empty.
 ```db_name``` is the name of the database you want to connect.
 ```option``` is 1:DuckDB + Bert, 2:DuckDB, 3:MonetDB
+```bert_directory``` is the absolute path of the file you downloaded and unzipped from https://storage.googleapis.com/koursaros/pt-bert-base-uncased-msmarco.tar.gz [1]
+
+# References
+
+[1] Cole Thienes and Jack Pertschuk. 2019. NBoost: Neural Boosting Search Results.https://github.com/koursaros-ai/nboost.
+
