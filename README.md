@@ -66,7 +66,7 @@ python rank_documents/preprocess_topics.py /path/to/topics
 ```
 * Ranking the documents using BM25:
 ```
-python rank_documents/rank_documents.py output_filename db_name option bert_directory
+python rank_documents/rank_queries.py output_filename db_name option bert_directory
 ```
 ```output_filename``` is the one used in Setup to creae JSON collection of the documents. If you are not planning to use BERT, you may leave it empty.
 ```db_name``` is the name of the database you want to connect.
