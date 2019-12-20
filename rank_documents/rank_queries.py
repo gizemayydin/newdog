@@ -6,10 +6,15 @@ from threading import Thread
 from typing import List
 import tensorflow as tf
 from queue import Queue
-import nboost.model.bert_model as bm
-from nboost.model.bert_model import modeling, tokenization
-from nboost.model.base import BaseModel
-from nboost.types import Choice
+import sys
+sys.path.append(".")
+import bert as bm
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from typing import List
+import numpy as np
+import torch.nn
+import torch
+from base import BaseModel
 import json
 import pymonetdb
 import statistics
@@ -92,7 +97,8 @@ if __name__ == '__main__':
 	raw_docs = sys.argv[1]
 	db_name = sys.argv[2]
 	option = int(sys.argv[3])
-	
+	bert_directory = sys.argv[4]
+
 	#Get the queries
 	queries = get_queries()
 	#Store execution time for each query
@@ -105,13 +111,14 @@ if __name__ == '__main__':
 		#Get the contents of the documents
 		contents = get_content(raw_docs)
 		#Inialize a BertModel instance
-		bert_model = bm.BertModel()
+		bert_model = bm.PtBertModel(bert_directory)
 		#connect to the database
 		con = duckdb.connect(db_name)
 		c = con.cursor()
 		end_time = 0
 		#For each query
 		for item in queries:
+			count = count + 1 ###
 			query_no, query= item['number'],item["title"]
 			results.write("Query: " + str(query_no) + "\n")
 			#Start timing
@@ -127,9 +134,9 @@ if __name__ == '__main__':
 					content  = contents[candidate_docs[i] + '.000000']['contents']
 					content = preprocess(content)
 					#Create a Choice object for each candidate document and store in a list
-					choices.append(Choice(i,content.encode('utf-8')))
+					choices.append(content)
 				#Rerank the candidate documents using the BertModel
-				ranked = bert_model.rank(query.encode('utf-8'),choices)
+				ranked = bert_model.rank(query,choices)
 				#End timing
 				end_time = time.time()
 				#Write top 10 results to results.txt
@@ -141,6 +148,7 @@ if __name__ == '__main__':
 				for i in range(num_results):
 					results.write(str(i+1) + ") " + candidate_docs[i]+"\n")
 			times.append(end_time - start_time)
+
 
 	
 	#If BertModel will not be used		
