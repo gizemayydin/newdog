@@ -1,6 +1,6 @@
 # NewDog
 
-TODO: introduction
+NewDog is an extensible Information Retrieval system for document retrieval that is based on promising software such as [OldDog](https://github.com/Chriskamphuis/olddog) and [NBoost](https://github.com/koursaros-ai/nboost). It implements the framework offered by OldDog, which enables the use of relational databases to calculate IR models for document retrieval, on different database management systems; and unites this approach with the current state of the art Natural Language Processing (NLP) model, BERT Language Model, optimized by NBoost for document retrieval.
 
 ## Preliminaries
 
@@ -66,7 +66,7 @@ python rank_documents/preprocess_topics.py /path/to/topics
 ```
 * Ranking the documents using BM25:
 ```
-python rank_documents/rank_queries.py output_filename db_name option bert_directory
+python rank_documents/rank_docs.py output_filename db_name option bert_directory
 ```
 ```output_filename``` is the one used in Setup to creae JSON collection of the documents. If you are not planning to use BERT, you may leave it empty.
 ```db_name``` is the name of the database you want to connect.
